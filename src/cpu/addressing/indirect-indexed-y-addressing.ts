@@ -4,6 +4,7 @@ import { Processor } from "../processor";
 import { IOperationWithAddress } from "../operations/i-operation-with-address";
 import { OperationHelper } from "../operations/operation-helper";
 import { IAddressing } from "./i-addressing";
+import { SystemMemory } from "../../memory/memory";
 
 export class IndirectIndexedYAddressing implements IAddressing {
     private _cpu: Processor;
@@ -30,7 +31,8 @@ export class IndirectIndexedYAddressing implements IAddressing {
         const lookupValue1 = this._cpu.memory.read(lookup + 1);
         const baseAddress = ByteHelper.combine(lookupValue0, lookupValue1);
         const address = baseAddress + this._cpu.registerY;
-        const extraCycles = this._operation.executeWithAddress(address);
+        this._operation.executeWithAddress(address);
+        const extraCycles = SystemMemory.pageBoundaryCrossPenalty(baseAddress, address);
         return this._delay + extraCycles;
     }
 }

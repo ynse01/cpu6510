@@ -30,8 +30,8 @@ export class AbsoluteIndexedXAddressing implements IAddressing {
         const value1 = OperationHelper.readNextInstruction(this._cpu);
         const absolute = ByteHelper.combine(value0, value1);
         const address = absolute + this._cpu.registerX;
-        const extraCycles = this._operation.executeWithAddress(address);
-        const pageCrossingCycles = SystemMemory.pageBoundaryCrossPanalty(absolute, address);
-        return this._delay + extraCycles + pageCrossingCycles;
+        this._operation.executeWithAddress(address);
+        const extraCycles = SystemMemory.pageBoundaryCrossPenalty(absolute, address);
+        return this._delay + extraCycles;
     }
 }

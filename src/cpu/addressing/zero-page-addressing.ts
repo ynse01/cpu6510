@@ -25,7 +25,7 @@ export class ZeroPageAddressing implements IAddressing {
 
     public execute(): number {
         const address = OperationHelper.readNextInstruction(this._cpu);
-        const extraCycles = this._operation.executeWithAddress(address);
-        return this._delay + extraCycles;
+        this._operation.executeWithAddress(address);
+        return this._delay;
     }
 }

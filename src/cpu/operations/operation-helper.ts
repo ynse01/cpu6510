@@ -13,7 +13,7 @@ export class OperationHelper {
         const delta = ByteHelper.signed(offset);
         const source = cpu.programCounter;
         const destination = source + delta;
-        const extraCrossing = (SystemMemory.pageBoundaryCrossPanalty(source, destination));
+        const extraCrossing = (SystemMemory.pageBoundaryCrossPenalty(source, destination));
         cpu.programCounter = destination;
         return extraCrossing;
     }

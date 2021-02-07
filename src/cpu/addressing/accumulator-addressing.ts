@@ -26,8 +26,8 @@ export class AccumulatorAddressing implements IAddressing {
         // Address comamnd wich operates on the Accumulator. 
         // Use address -0x0042 as scratch.
         const address = -0x0042;
-        const extraCycles = this._operation.executeWithAddress(address);
+        this._operation.executeWithAddress(address);
         this._cpu.accumulator = this._cpu.memory.read(address);
-        return this._delay + extraCycles;
+        return this._delay;
     }
 }

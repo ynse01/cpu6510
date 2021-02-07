@@ -3,6 +3,8 @@ import { Processor } from "../processor";
 import { IOperationWithAddress } from "../operations/i-operation-with-address";
 import { OperationHelper } from "../operations/operation-helper";
 import { IAddressing } from "./i-addressing";
+import { SystemMemory } from "../../memory/memory";
+import { ByteHelper } from "../../byte-helper";
 
 export class ZeroPageIndexedYAddressing implements IAddressing {
     private _cpu: Processor;
@@ -25,8 +27,8 @@ export class ZeroPageIndexedYAddressing implements IAddressing {
 
     public execute(): number {
         const value = OperationHelper.readNextInstruction(this._cpu);
-        const address = value + this._cpu.registerX;
-        const extraCycles = this._operation.executeWithAddress(address);
-        return this._delay + extraCycles;
+        const address = value + this._cpu.registerY;
+        this._operation.executeWithAddress(address);
+        return this._delay;
     }
 }

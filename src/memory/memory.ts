@@ -27,7 +27,7 @@ export class SystemMemory {
         this._ram.write(clippedAddress, clippedValue);
     }
 
-    public static pageBoundaryCrossPanalty(address0: number, address1: number): number {
+    public static pageBoundaryCrossPenalty(address0: number, address1: number): number {
         const high0 = ByteHelper.highByte(address0);
         const high1 = ByteHelper.highByte(address1);
         return (high0 != high1)? 1: 0;

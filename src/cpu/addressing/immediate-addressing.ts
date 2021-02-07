@@ -25,7 +25,7 @@ export class ImmediateAddressing implements IAddressing {
 
     public execute(): number {
         const value = OperationHelper.readNextInstruction(this._cpu);
-        const extraCycles = this._operation.executeWithValue(value);
-        return this._delay + extraCycles;
+        this._operation.executeWithValue(value);
+        return this._delay;
     }
 }

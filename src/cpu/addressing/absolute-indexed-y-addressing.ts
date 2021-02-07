@@ -4,6 +4,7 @@ import { IOperationWithAddress } from "../operations/i-operation-with-address";
 import { AddressingMode } from "../addressing-mode";
 import { IAddressing } from "./i-addressing";
 import { OperationHelper } from "../operations/operation-helper";
+import { SystemMemory } from "../../memory/memory";
 
 export class AbsoluteIndexedYAddressing implements IAddressing {
     private _cpu: Processor;
@@ -29,7 +30,8 @@ export class AbsoluteIndexedYAddressing implements IAddressing {
         const value1 = OperationHelper.readNextInstruction(this._cpu);
         const absolute = ByteHelper.combine(value0, value1);
         const address = absolute + this._cpu.registerY;
-        const extraCycles = this._operation.executeWithAddress(address);
+        this._operation.executeWithAddress(address);
+        const extraCycles = SystemMemory.pageBoundaryCrossPenalty(absolute, address);
         return this._delay + extraCycles;
     }
 }

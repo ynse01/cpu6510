@@ -30,7 +30,7 @@ export class IndirectIndexedXAddressing implements IAddressing {
         const lookupValue0 = this._cpu.memory.read(lookup);
         const lookupValue1 = this._cpu.memory.read(lookup + 1);
         const address = ByteHelper.combine(lookupValue0, lookupValue1);
-        const extraCycles = this._operation.executeWithAddress(address);
-        return this._delay + extraCycles;
+        this._operation.executeWithAddress(address);
+        return this._delay;
     }
 }
