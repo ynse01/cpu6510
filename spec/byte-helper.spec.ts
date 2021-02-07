@@ -1,13 +1,13 @@
-import { Util } from "../src/util";
+import { ByteHelper } from "../src/byte-helper";
 
-describe('Util.combine', ()=> {
+describe('ByteHelper.combine', ()=> {
     it('ShouldCombineBytesInLittleEndianOrder', ()=> {
         // Arrange
         const expected = 0x4223;
         const input0 = 0x23;
         const input1 = 0x42;
         // Act
-        const actual = Util.combine(input0, input1);
+        const actual = ByteHelper.combine(input0, input1);
         // Assert
         expect(actual).toBe(expected);
     });
@@ -17,7 +17,7 @@ describe('Util.combine', ()=> {
         const input0 = 0x0323;
         const input1 = 0x42;
         // Act
-        const actual = Util.combine(input0, input1);
+        const actual = ByteHelper.combine(input0, input1);
         // Assert
         expect(actual).toBe(expected);
     });
@@ -27,19 +27,19 @@ describe('Util.combine', ()=> {
         const input0 = 0x23;
         const input1 = 0x0442;
         // Act
-        const actual = Util.combine(input0, input1);
+        const actual = ByteHelper.combine(input0, input1);
         // Assert
         expect(actual).toBe(expected);
     });
 });
 
-describe('Util.highByte', ()=> {
+describe('ByteHelper.highByte', ()=> {
     it('ShouldReturnZeroForSmallNumbers', ()=> {
         // Arrange
         const expected = 0;
         const input = 23;
         // Act
-        const actual = Util.highByte(input);
+        const actual = ByteHelper.highByte(input);
         // Assert
         expect(actual).toBe(expected);
     });
@@ -48,19 +48,19 @@ describe('Util.highByte', ()=> {
         const expected = 0x42;
         const input = 0x4223;
         // Act
-        const actual = Util.highByte(input);
+        const actual = ByteHelper.highByte(input);
         // Assert
         expect(actual).toBe(expected);
     });
 });
 
-describe('Util.clipByte', ()=> {
+describe('ByteHelper.clipByte', ()=> {
     it('ShouldReturnZeroFor256', ()=> {
         // Arrange
         const expected = 0;
         const input = 256;
         // Act
-        const actual = Util.clipByte(input);
+        const actual = ByteHelper.clipByte(input);
         // Assert
         expect(actual).toBe(expected);
     });
@@ -69,7 +69,7 @@ describe('Util.clipByte', ()=> {
         const expected = 0x23;
         const input = 0x4223;
         // Act
-        const actual = Util.clipByte(input);
+        const actual = ByteHelper.clipByte(input);
         // Assert
         expect(actual).toBe(expected);
     });
@@ -78,19 +78,19 @@ describe('Util.clipByte', ()=> {
         const expected = 0x23;
         const input = -0x23;
         // Act
-        const actual = Util.clipByte(input);
+        const actual = ByteHelper.clipByte(input);
         // Assert
         expect(actual).toBe(expected);
     });
 });
 
-describe('Util.signed', ()=> {
+describe('ByteHelper.signed', ()=> {
     it('ShouldReturnNegativeNumberForHighNumber', ()=> {
         // Arrange
         const expected = -96;
         const input = 223;
         // Act
-        const actual = Util.signed(input);
+        const actual = ByteHelper.signed(input);
         // Assert
         expect(actual).toBe(expected);
     });
@@ -99,7 +99,7 @@ describe('Util.signed', ()=> {
         const expected = 0x23;
         const input = 0x23;
         // Act
-        const actual = Util.signed(input);
+        const actual = ByteHelper.signed(input);
         // Assert
         expect(actual).toBe(expected);
     });

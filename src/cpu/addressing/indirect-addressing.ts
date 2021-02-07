@@ -1,4 +1,4 @@
-import { Util } from "../../util";
+import { ByteHelper } from "../../byte-helper";
 import { AddressingMode } from "../addressing-mode";
 import { Processor } from "../processor";
 import { IOperationWithAddress } from "../operations/i-operation-with-address";
@@ -27,10 +27,10 @@ export class IndirectAddressing implements IAddressing {
     public execute(): number {
         const value0 = OperationHelper.readNextInstruction(this._cpu);
         const value1 = OperationHelper.readNextInstruction(this._cpu);
-        const lookupAddress = Util.combine(value0, value1);
+        const lookupAddress = ByteHelper.combine(value0, value1);
         const lookupValue0 = this._cpu.memory.read(lookupAddress);
         const lookupValue1 = this._cpu.memory.read(lookupAddress + 1);
-        const address = Util.combine(lookupValue0, lookupValue1);
+        const address = ByteHelper.combine(lookupValue0, lookupValue1);
         const extraCycles = this._operation.executeWithAddress(address);
         return this._delay + extraCycles;
     }

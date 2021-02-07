@@ -1,4 +1,4 @@
-import { Util } from "../../../util";
+import { ByteHelper } from "../../../byte-helper";
 import { AddressingMode } from "../../addressing-mode";
 import { Processor } from "../../processor";
 import { IOperationWithAddress } from "../i-operation-with-address";
@@ -13,11 +13,11 @@ export class ASL implements IOperationWithAddress, IOperationWithValue {
 
     public executeWithValue(value: number): number {
         // In Javascript Numbers, multiplication is quicker than shifting.
-        const result = Util.clipByte(value * 2);
+        const result = ByteHelper.clipByte(value * 2);
         this._cpu.zeroFlag = result == 0;
         this._cpu.negativeFlag = result > 127;
         this._cpu.carryFlag = result > 255;
-        this._cpu.accumulator = Util.clipByte(value);
+        this._cpu.accumulator = ByteHelper.clipByte(value);
         return 0;
     }
     

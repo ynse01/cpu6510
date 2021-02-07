@@ -1,4 +1,4 @@
-import { Util } from "../../../util";
+import { ByteHelper } from "../../../byte-helper";
 import { AddressingMode } from "../../addressing-mode";
 import { Processor } from "../../processor";
 import { IOperationWithAddress } from "../i-operation-with-address";
@@ -19,7 +19,7 @@ export class SBC implements IOperationWithAddress, IOperationWithValue {
         // Overflow is set when bit 7 is flipped as a consequence of this operation.
         this._cpu.overflowFlag = (~(this._cpu.accumulator ^ value) & (this._cpu.accumulator ^ value) & 0x80) == 0;
         this._cpu.carryFlag = result <= 255;
-        this._cpu.accumulator = Util.clipByte(result);
+        this._cpu.accumulator = ByteHelper.clipByte(result);
         return 0;
     }
     

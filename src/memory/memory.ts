@@ -1,4 +1,4 @@
-import { Util } from "../util";
+import { ByteHelper } from "../byte-helper";
 import { RandomAccessMemoryBank } from "./random-access-memory-bank";
 
 export class SystemMemory {
@@ -23,13 +23,13 @@ export class SystemMemory {
 
     public write(address: number, value: number): void {
         const clippedAddress = this._clipAddress(address);
-        const clippedValue = Util.clipByte(value);
+        const clippedValue = ByteHelper.clipByte(value);
         this._ram.write(clippedAddress, clippedValue);
     }
 
     public static pageBoundaryCrossPanalty(address0: number, address1: number): number {
-        const high0 = Util.highByte(address0);
-        const high1 = Util.highByte(address1);
+        const high0 = ByteHelper.highByte(address0);
+        const high1 = ByteHelper.highByte(address1);
         return (high0 != high1)? 1: 0;
     }
 

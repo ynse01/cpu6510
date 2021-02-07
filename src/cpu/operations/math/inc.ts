@@ -1,4 +1,4 @@
-import { Util } from "../../../util";
+import { ByteHelper } from "../../../byte-helper";
 import { AddressingMode } from "../../addressing-mode";
 import { Processor } from "../../processor";
 import { IOperationWithAddress } from "../i-operation-with-address";
@@ -12,7 +12,7 @@ export class INC implements IOperationWithAddress {
 
     public executeWithAddress(address: number): number {
         const value = this._cpu.memory.read(address);
-        const result = Util.clipByte(value + 1);
+        const result = ByteHelper.clipByte(value + 1);
         this._cpu.memory.write(address, result);
         this._cpu.zeroFlag = result == 0;
         this._cpu.negativeFlag = result > 127;

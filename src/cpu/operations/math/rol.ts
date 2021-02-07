@@ -1,4 +1,4 @@
-import { Util } from "../../../util";
+import { ByteHelper } from "../../../byte-helper";
 import { AddressingMode } from "../../addressing-mode";
 import { Processor } from "../../processor";
 import { IOperationWithAddress } from "../i-operation-with-address";
@@ -16,7 +16,7 @@ export class ROL implements IOperationWithAddress {
         // In Javascript Numbers, multiplication is quicker than shifting.
         value *= 2;
         value += (carry) ? 128 : 0;
-        this._cpu.memory.write(address, Util.clipByte(value));
+        this._cpu.memory.write(address, ByteHelper.clipByte(value));
         this._cpu.zeroFlag = value == 0;
         this._cpu.negativeFlag = value > 127;
         this._cpu.carryFlag = value > 255;

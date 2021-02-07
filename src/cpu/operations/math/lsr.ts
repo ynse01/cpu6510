@@ -1,4 +1,4 @@
-import { Util } from "../../../util";
+import { ByteHelper } from "../../../byte-helper";
 import { AddressingMode } from "../../addressing-mode";
 import { Processor } from "../../processor";
 import { IOperationWithAddress } from "../i-operation-with-address";
@@ -17,7 +17,7 @@ export class LSR implements IOperationWithAddress, IOperationWithValue {
         this._cpu.zeroFlag = result == 0;
         this._cpu.negativeFlag = result > 127;
         this._cpu.carryFlag = result > 255;
-        this._cpu.accumulator = Util.clipByte(value);
+        this._cpu.accumulator = ByteHelper.clipByte(value);
         return 0;
     }
     

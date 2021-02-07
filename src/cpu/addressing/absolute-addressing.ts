@@ -1,4 +1,4 @@
-import { Util } from "../../util";
+import { ByteHelper } from "../../byte-helper";
 import { Processor } from "../processor";
 import { IOperationWithAddress } from "../operations/i-operation-with-address";
 import { AddressingMode } from "../addressing-mode";
@@ -27,7 +27,7 @@ export class AbsoluteAddressing implements IAddressing {
     public execute(): number {
         const value0 = OperationHelper.readNextInstruction(this._cpu);
         const value1 = OperationHelper.readNextInstruction(this._cpu);
-        const address = Util.combine(value0, value1);
+        const address = ByteHelper.combine(value0, value1);
         const extraCycles = this._operation.executeWithAddress(address);
         return this._delay + extraCycles;
     }

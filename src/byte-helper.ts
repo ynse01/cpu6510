@@ -1,8 +1,8 @@
 
-export class Util {
+export class ByteHelper {
 
     public static combine(value0: number, value1: number): number {
-        return Util.clipByte(value0) + (256 * Util.clipByte(value1));
+        return ByteHelper.clipByte(value0) + (256 * ByteHelper.clipByte(value1));
     }
 
     public static clipByte(val: number): number {

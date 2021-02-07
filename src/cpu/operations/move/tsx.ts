@@ -1,4 +1,4 @@
-import { Util } from "../../../util";
+import { ByteHelper } from "../../../byte-helper";
 import { AddressingMode } from "../../addressing-mode";
 import { Processor } from "../../processor";
 import { IOperationImplicit } from "../i-operation-implicit";
@@ -12,7 +12,7 @@ export class TSX implements IOperationImplicit {
     }
 
     public execute(): number {
-        const address = Util.combine(this._cpu.stackPointer, 0x01);
+        const address = ByteHelper.combine(this._cpu.stackPointer, 0x01);
         const value = this._cpu.memory.read(address);
         this._cpu.registerX = value;
         this._cpu.zeroFlag = value == 0;

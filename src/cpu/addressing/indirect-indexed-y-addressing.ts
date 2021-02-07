@@ -1,4 +1,4 @@
-import { Util } from "../../util";
+import { ByteHelper } from "../../byte-helper";
 import { AddressingMode } from "../addressing-mode";
 import { Processor } from "../processor";
 import { IOperationWithAddress } from "../operations/i-operation-with-address";
@@ -28,7 +28,7 @@ export class IndirectIndexedYAddressing implements IAddressing {
         const lookup = OperationHelper.readNextInstruction(this._cpu);
         const lookupValue0 = this._cpu.memory.read(lookup);
         const lookupValue1 = this._cpu.memory.read(lookup + 1);
-        const baseAddress = Util.combine(lookupValue0, lookupValue1);
+        const baseAddress = ByteHelper.combine(lookupValue0, lookupValue1);
         const address = baseAddress + this._cpu.registerY;
         const extraCycles = this._operation.executeWithAddress(address);
         return this._delay + extraCycles;

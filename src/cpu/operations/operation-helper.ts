@@ -1,5 +1,5 @@
 import { SystemMemory } from "../../memory/memory";
-import { Util } from "../../util";
+import { ByteHelper } from "../../byte-helper";
 import { Processor } from "../processor";
 
 export class OperationHelper {
@@ -10,7 +10,7 @@ export class OperationHelper {
     }
 
     public static jumpRelative(cpu: Processor, offset: number): number {
-        const delta = Util.signed(offset);
+        const delta = ByteHelper.signed(offset);
         const source = cpu.programCounter;
         const destination = source + delta;
         const extraCrossing = (SystemMemory.pageBoundaryCrossPanalty(source, destination));
@@ -19,8 +19,8 @@ export class OperationHelper {
     }
 
     public static pushAllState(cpu: Processor): void {
-        OperationHelper.pushStack(cpu, Util.highByte(cpu.programCounter));
-        OperationHelper.pushStack(cpu, Util.clipByte(cpu.programCounter));
+        OperationHelper.pushStack(cpu, ByteHelper.highByte(cpu.programCounter));
+        OperationHelper.pushStack(cpu, ByteHelper.clipByte(cpu.programCounter));
         OperationHelper.pushStack(cpu, OperationHelper.getStatus(cpu));
     }
 
@@ -28,7 +28,7 @@ export class OperationHelper {
         OperationHelper.setStatus(cpu, OperationHelper.popStack(cpu));
         const value0 = OperationHelper.popStack(cpu);
         const value1 = OperationHelper.popStack(cpu);
-        const address = Util.combine(value0, value1);
+        const address = ByteHelper.combine(value0, value1);
         cpu.programCounter = address;
     }
 
@@ -57,13 +57,13 @@ export class OperationHelper {
     }
 
     public static setStatus(cpu: Processor, value: number): void {
-        cpu.negativeFlag = Util.getBit7(value);
-        cpu.overflowFlag = Util.getBit6(value);
+        cpu.negativeFlag = ByteHelper.getBit7(value);
+        cpu.overflowFlag = ByteHelper.getBit6(value);
         // Bit 5 is unused
         // Break flag is not touched.
-        cpu.decimalFlag = Util.getBit3(value);
-        cpu.interruptFlag = Util.getBit2(value);
-        cpu.zeroFlag = Util.getBit1(value);
-        cpu.carryFlag = Util.getBit0(value);
+        cpu.decimalFlag = ByteHelper.getBit3(value);
+        cpu.interruptFlag = ByteHelper.getBit2(value);
+        cpu.zeroFlag = ByteHelper.getBit1(value);
+        cpu.carryFlag = ByteHelper.getBit0(value);
     }
 }
