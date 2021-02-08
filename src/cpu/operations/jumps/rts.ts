@@ -15,6 +15,7 @@ export class RTS implements IOperationImplicit {
         return 0;
     }
         
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public delay(_mode: AddressingMode): number {
         const delay = 6;
         return delay;

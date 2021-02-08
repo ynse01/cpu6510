@@ -3,6 +3,7 @@ import { Processor } from "../../processor";
 import { IOperationWithAddress } from "../i-operation-with-address";
 import { IOperationWithValue } from "../i-operation-with-value";
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 export class LAX implements IOperationWithAddress, IOperationWithValue {
     constructor(cpu: Processor) {
         // Nothing to do here.

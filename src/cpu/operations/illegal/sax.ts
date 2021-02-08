@@ -2,6 +2,7 @@ import { AddressingMode } from "../../addressing-mode";
 import { Processor } from "../../processor";
 import { IOperationWithAddress } from "../i-operation-with-address";
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 export class SAX implements IOperationWithAddress {
     constructor(cpu: Processor) {
         // Nothing to do here.

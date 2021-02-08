@@ -4,6 +4,7 @@ import { IOperationImplicit } from "../i-operation-implicit";
 import { IOperationWithAddress } from "../i-operation-with-address";
 import { IOperationWithValue } from "../i-operation-with-value";
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 export class KIL implements IOperationImplicit, IOperationWithAddress, IOperationWithValue {
     
     constructor(cpu: Processor) {

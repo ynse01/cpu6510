@@ -2,6 +2,7 @@ import { AddressingMode } from "../../addressing-mode";
 import { Processor } from "../../processor";
 import { IOperationWithValue } from "../i-operation-with-value";
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 export class ALR implements IOperationWithValue {
     constructor(cpu: Processor) {
         // Nothing to do here.
