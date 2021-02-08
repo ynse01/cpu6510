@@ -9,18 +9,23 @@ export class OperationHelper {
         return value;
     }
 
-    public static jumpRelative(cpu: Processor, offset: number): number {
-        const delta = ByteHelper.signed(offset);
-        const source = cpu.programCounter;
-        const destination = source + delta;
-        const extraCrossing = SystemMemory.pageBoundaryCrossPenalty(source, destination);
-        cpu.programCounter = destination;
-        return extraCrossing;
+    public static jumpConditionally(cpu: Processor, condition: boolean, offset: number): number {
+        let extraCycles = 0;
+        if (condition == true) {
+            const delta = ByteHelper.signed(offset);
+            const source = cpu.programCounter;
+            const destination = source + delta;
+            const extraCrossing = SystemMemory.pageBoundaryCrossPenalty(source, destination);
+            extraCycles = 1 + extraCrossing;
+            // Jump to destination.
+            cpu.programCounter = destination;
+        }
+        return extraCycles;
     }
 
     public static pushAllState(cpu: Processor): void {
-        OperationHelper.pushStack(cpu, ByteHelper.highByte(cpu.programCounter));
         OperationHelper.pushStack(cpu, ByteHelper.clipByte(cpu.programCounter));
+        OperationHelper.pushStack(cpu, ByteHelper.highByte(cpu.programCounter));
         OperationHelper.pushStack(cpu, OperationHelper.getStatus(cpu));
     }
 
@@ -45,14 +50,15 @@ export class OperationHelper {
     }
 
     public static getStatus(cpu: Processor): number {
-        let result = 4;
-        result += (cpu.negativeFlag) ? 1 : 0;
-        result += (cpu.overflowFlag) ? 2 : 0;
-        result += (cpu.breakFlag) ? 8 : 0;
-        result += (cpu.decimalFlag) ? 16 : 0;
-        result += (cpu.interruptFlag) ? 32 : 0;
-        result += (cpu.zeroFlag) ? 64 : 0;
-        result += (cpu.carryFlag) ? 128 : 0;
+        // bit5 is unused and always set.
+        let result = 32;
+        result += (cpu.negativeFlag) ? 128 : 0;
+        result += (cpu.overflowFlag) ? 64 : 0;
+        result += (cpu.breakFlag) ? 16 : 0;
+        result += (cpu.decimalFlag) ? 8 : 0;
+        result += (cpu.interruptFlag) ? 4 : 0;
+        result += (cpu.zeroFlag) ? 2 : 0;
+        result += (cpu.carryFlag) ? 1 : 0;
         return result;
     }
 

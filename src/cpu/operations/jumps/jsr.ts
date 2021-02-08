@@ -11,6 +11,7 @@ export class JSR implements IOperationWithAddress {
     }
 
     public executeWithAddress(address: number): number {
+        this._cpu.programCounter += 2;
         OperationHelper.pushAllState(this._cpu);
         this._cpu.programCounter = address;
         return 0;

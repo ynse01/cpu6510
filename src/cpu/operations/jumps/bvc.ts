@@ -11,13 +11,8 @@ export class BVC implements IOperationWithValue {
     }
 
     public executeWithValue(offset: number): number {
-        let extraBranching = 0;
-        let extraCrossing = 0;
-        if (!this._cpu.overflowFlag) {
-            extraBranching = 1;
-            extraCrossing = OperationHelper.jumpRelative(this._cpu, offset);
-        }
-        return extraBranching + extraCrossing;
+        const extraCycles = OperationHelper.jumpConditionally(this._cpu, !this._cpu.overflowFlag, offset);
+        return extraCycles;
     }
         
     public delay(mode: AddressingMode): number {

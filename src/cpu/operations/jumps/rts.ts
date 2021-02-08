@@ -12,6 +12,7 @@ export class RTS implements IOperationImplicit {
 
     public execute(): number {
         OperationHelper.pushAllState(this._cpu);
+        this._cpu.programCounter++;
         return 0;
     }
         

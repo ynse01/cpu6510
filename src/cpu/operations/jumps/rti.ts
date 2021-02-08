@@ -11,7 +11,7 @@ export class RTI implements IOperationImplicit {
     }
 
     public execute(): number {
-        OperationHelper.pushAllState(this._cpu);
+        OperationHelper.popAllState(this._cpu);
         return 0;
     }
         

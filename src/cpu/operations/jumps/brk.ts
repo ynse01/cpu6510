@@ -1,3 +1,4 @@
+import { ByteHelper } from "../../../byte-helper";
 import { AddressingMode } from "../../addressing-mode";
 import { Processor } from "../../processor";
 import { IOperationImplicit } from "../i-operation-implicit";
@@ -11,8 +12,12 @@ export class BRK implements IOperationImplicit {
     }
 
     public execute(): number {
+        this._cpu.programCounter += 2;
         OperationHelper.pushAllState(this._cpu);
-        this._cpu.programCounter = 0xFFFE;
+        // Move program counter to the IRQ Vector.
+        const value0 = this._cpu.memory.read(0xfffe);
+        const value1 = this._cpu.memory.read(0xffff);
+        this._cpu.programCounter = ByteHelper.combine(value0, value1);
         this._cpu.breakFlag = true;
         this._cpu.interruptFlag = true;
         return 0;
