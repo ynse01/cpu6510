@@ -39,13 +39,11 @@ export class OperationHelper {
 
     public static pushStack(cpu: Processor, value: number): void {
         cpu.memory.write(cpu.stackPointer + 0x0100, value);
-		cpu.stackPointer--;
-		cpu.stackPointer %= 256;
+		cpu.stackPointer = ByteHelper.clipByte(cpu.stackPointer - 1);
     }
 
     public static popStack(cpu: Processor): number {
-		cpu.stackPointer++;
-		cpu.stackPointer %= 256;
+		cpu.stackPointer = ByteHelper.clipByte(cpu.stackPointer + 1);
         return cpu.memory.read(cpu.stackPointer + 0x0100);
     }
 
