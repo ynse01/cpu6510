@@ -31,8 +31,8 @@ export class OperationHelper {
 
     public static popAllState(cpu: Processor): void {
         OperationHelper.setStatus(cpu, OperationHelper.popStack(cpu));
-        const value0 = OperationHelper.popStack(cpu);
         const value1 = OperationHelper.popStack(cpu);
+        const value0 = OperationHelper.popStack(cpu);
         const address = ByteHelper.combine(value0, value1);
         cpu.programCounter = address;
     }

@@ -21,35 +21,35 @@ export class ByteHelper {
         return result;
     }
 
-    public static getBit7(value: number): boolean {
+    public static getBit0(value: number): boolean {
         return (value % 2) > 0;
     }
 
-    public static getBit6(value: number): boolean {
+    public static getBit1(value: number): boolean {
         return (value % 4) > 1;
     }
 
-    public static getBit5(value: number): boolean {
+    public static getBit2(value: number): boolean {
         return (value % 8) > 3;
     }
 
-    public static getBit4(value: number): boolean {
+    public static getBit3(value: number): boolean {
         return (value % 16) > 7;
     }
 
-    public static getBit3(value: number): boolean {
+    public static getBit4(value: number): boolean {
         return (value % 32) > 15;
     }
 
-    public static getBit2(value: number): boolean {
+    public static getBit5(value: number): boolean {
         return (value % 64) > 31;
     }
 
-    public static getBit1(value: number): boolean {
+    public static getBit6(value: number): boolean {
         return (value % 128) > 63;
     }
 
-    public static getBit0(value: number): boolean {
+    public static getBit7(value: number): boolean {
         return value > 127;
     }
 
