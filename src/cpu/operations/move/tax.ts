@@ -12,6 +12,8 @@ export class TAX implements IOperationImplicit {
 
     public execute(): number {
         this._cpu.registerX = this._cpu.accumulator;
+        this._cpu.zeroFlag = this._cpu.registerX == 0;
+        this._cpu.negativeFlag = this._cpu.registerX > 127;
         return 0;
     }
 

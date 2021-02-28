@@ -12,6 +12,8 @@ export class TYA implements IOperationImplicit {
 
     public execute(): number {
         this._cpu.accumulator = this._cpu.registerY;
+        this._cpu.zeroFlag = this._cpu.accumulator == 0;
+        this._cpu.negativeFlag = this._cpu.accumulator > 127;
         return 0;
     }
 
