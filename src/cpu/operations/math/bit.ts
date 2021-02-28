@@ -13,8 +13,10 @@ export class BIT implements IOperationWithAddress {
         const value = this._cpu.memory.read(address);
         const and = this._cpu.accumulator & value;
         this._cpu.zeroFlag = and == 0;
+        // Check bit 7 of memory value
         this._cpu.negativeFlag = value > 127;
-        this._cpu.overflowFlag = value > 255;
+        // Check bit 6 of memory value
+        this._cpu.overflowFlag = (value % 128) > 63;
         return 0;
     }
     
