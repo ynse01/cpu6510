@@ -143,7 +143,7 @@ describe('Operations.ADC', ()=> {
         adc.executeWithValue(value);
         // Assert
         expect(cpu.accumulator).toBe(expected);
-        //expect(cpu.negativeFlag).toBeFalse();
+        expect(cpu.negativeFlag).toBeFalse();
         // Cleanup
         cpu.reset();
     });

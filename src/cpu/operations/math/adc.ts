@@ -17,7 +17,7 @@ export class ADC implements IOperationWithAddress, IOperationWithValue {
         this._cpu.zeroFlag = (result % 256) == 0;
         // Overflow is set when bit 7 is flipped as a consequence of this operation.
         this._cpu.overflowFlag = ((this._cpu.accumulator >= 128) != (result >= 128));
-        this._cpu.negativeFlag = result >= 128;
+        this._cpu.negativeFlag = (result % 256) >= 128;
         this._cpu.carryFlag = result >= 255;
         this._cpu.accumulator = ByteHelper.clipByte(result);
         return 0;
