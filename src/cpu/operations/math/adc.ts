@@ -14,11 +14,11 @@ export class ADC implements IOperationWithAddress, IOperationWithValue {
     public executeWithValue(value: number): number {
         const oldCarry = (this._cpu.carryFlag) ? 1 : 0;
         const result = this._cpu.accumulator + value + oldCarry;
-        this._cpu.zeroFlag = result == 0;
+        this._cpu.zeroFlag = (result % 256) == 0;
+        // Overflow is set when negative flag (equivalent to bit 7) is flipped as a consequence of this operation.
+        this._cpu.overflowFlag = (this._cpu.negativeFlag != (result >= 128));
         this._cpu.negativeFlag = result >= 128;
-        // Overflow is set when bit 7 is flipped as a consequence of this operation.
-        this._cpu.overflowFlag = (~(this._cpu.accumulator ^ value) & (this._cpu.accumulator ^ value) & 0x80) == 0;
-        this._cpu.carryFlag = result <= 255;
+        this._cpu.carryFlag = result >= 255;
         this._cpu.accumulator = ByteHelper.clipByte(result);
         return 0;
     }
