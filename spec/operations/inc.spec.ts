@@ -66,6 +66,7 @@ describe('Operations.INC', ()=> {
         inc.executeWithAddress(address);
         // Assert
         expect(cpu.memory.read(address)).toBe(expected);
+        expect(cpu.negativeFlag).toBeFalse();
         // Cleanup
         cpu.reset();
         cpu.memory.write(address, 0);
