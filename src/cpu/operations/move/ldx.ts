@@ -12,6 +12,8 @@ export class LDX implements IOperationWithAddress, IOperationWithValue {
 
     public executeWithValue(value: number): number {
         this._cpu.registerX = value;
+        this._cpu.zeroFlag = this._cpu.registerX == 0;
+        this._cpu.negativeFlag = this._cpu.registerX > 127;
         return 0;
     }
 
