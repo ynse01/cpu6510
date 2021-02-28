@@ -75,7 +75,7 @@ describe('ByteHelper.clipByte', ()=> {
     });
     it('ShouldReturnPositiveNumber', ()=> {
         // Arrange
-        const expected = 0x23;
+        const expected = 0x0100 - 0x23;
         const input = -0x23;
         // Act
         const actual = ByteHelper.clipByte(input);

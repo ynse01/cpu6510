@@ -6,7 +6,7 @@ export class ByteHelper {
     }
 
     public static clipByte(val: number): number {
-        return Math.abs(val % 256);
+        return Math.abs((val + 256) % 256);
     }
 
     public static highByte(address: number): number {
