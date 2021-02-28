@@ -1,7 +1,7 @@
-import { ByteHelper } from "../../src/byte-helper";
-import { RTI } from "../../src/cpu/operations/jumps/rti";
-import { OperationHelper } from "../../src/cpu/operations/operation-helper";
-import { Processor } from "../../src/cpu/processor";
+import { ByteHelper } from "../../../src/byte-helper";
+import { RTI } from "../../../src/cpu/operations/jumps/rti";
+import { OperationHelper } from "../../../src/cpu/operations/operation-helper";
+import { Processor } from "../../../src/cpu/processor";
 
 const cpu = new Processor();
 

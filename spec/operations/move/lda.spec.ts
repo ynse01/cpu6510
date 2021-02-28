@@ -1,5 +1,5 @@
-import { Processor } from "../../src/cpu/processor";
-import { LDA } from "../../src/cpu/operations/move/lda";
+import { Processor } from "../../../src/cpu/processor";
+import { LDA } from "../../../src/cpu/operations/move/lda";
 
 const cpu = new Processor();
 

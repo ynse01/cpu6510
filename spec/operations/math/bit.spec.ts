@@ -1,5 +1,5 @@
-import { Processor } from "../../src/cpu/processor";
-import { BIT } from "../../src/cpu/operations/math/bit";
+import { Processor } from "../../../src/cpu/processor";
+import { BIT } from "../../../src/cpu/operations/math/bit";
 
 const cpu = new Processor();
 

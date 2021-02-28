@@ -1,6 +1,6 @@
-import { ByteHelper } from "../../src/byte-helper";
-import { BRK } from "../../src/cpu/operations/jumps/brk";
-import { Processor } from "../../src/cpu/processor";
+import { ByteHelper } from "../../../src/byte-helper";
+import { BRK } from "../../../src/cpu/operations/jumps/brk";
+import { Processor } from "../../../src/cpu/processor";
 
 const cpu = new Processor();
 

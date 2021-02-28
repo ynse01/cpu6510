@@ -1,16 +1,16 @@
-import { Processor } from "../../src/cpu/processor";
-import { AND } from "../../src/cpu/operations/math/and";
+import { Processor } from "../../../src/cpu/processor";
+import { EOR } from "../../../src/cpu/operations/math/eor";
 
 const cpu = new Processor();
 
-describe('Operations.AND', ()=> {
+describe('Operations.ORA', ()=> {
     it('ShouldSetZeroFlagWhenResultOfBitwiseAndIsZero', ()=> {
         // Arrange
-        const and = new AND(cpu);
-        cpu.accumulator = 128;
-        const value = 64;
+        const eor = new EOR(cpu);
+        cpu.accumulator = 0;
+        const value = 0;
         // Act
-        and.executeWithValue(value);
+        eor.executeWithValue(value);
         // Assert
         expect(cpu.accumulator).toBe(0);
         expect(cpu.zeroFlag).toBeTrue();
@@ -19,24 +19,24 @@ describe('Operations.AND', ()=> {
     });
     it('ShouldClearZeroFlagWhenResultOfBitwiseAndIsNonZero', ()=> {
         // Arrange
-        const and = new AND(cpu);
+        const eor = new EOR(cpu);
         cpu.accumulator = 96;
         const value = 32;
         // Act
-        and.executeWithValue(value);
+        eor.executeWithValue(value);
         // Assert
-        expect(cpu.accumulator).toBe(32);
+        expect(cpu.accumulator).toBe(64);
         expect(cpu.zeroFlag).toBeFalse();
         // Cleanup
         cpu.reset();
     });
     it('ShouldSetNegativeFlagWhenMemoryValueIsBiggerThan128', ()=> {
         // Arrange
-        const and = new AND(cpu);
+        const eor = new EOR(cpu);
         cpu.accumulator = 192;
-        const value = 128;
+        const value = 64;
         // Act
-        and.executeWithValue(value);
+        eor.executeWithValue(value);
         // Assert
         expect(cpu.accumulator).toBe(128);
         expect(cpu.negativeFlag).toBeTrue();
@@ -45,13 +45,13 @@ describe('Operations.AND', ()=> {
     });
     it('ShouldClearNegativeFlagWhenMemoryValueIsSmallerThan128', ()=> {
         // Arrange
-        const and = new AND(cpu);
-        cpu.accumulator = 192;
+        const eor = new EOR(cpu);
+        cpu.accumulator = 32;
         const value = 64;
         // Act
-        and.executeWithValue(value);
+        eor.executeWithValue(value);
         // Assert
-        expect(cpu.accumulator).toBe(64);
+        expect(cpu.accumulator).toBe(96);
         expect(cpu.negativeFlag).toBeFalse();
         // Cleanup
         cpu.reset();

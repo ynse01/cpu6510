@@ -1,5 +1,5 @@
-import { Processor } from "../../src/cpu/processor";
-import { INC } from "../../src/cpu/operations/math/inc";
+import { Processor } from "../../../src/cpu/processor";
+import { INC } from "../../../src/cpu/operations/math/inc";
 
 const cpu = new Processor();
 
