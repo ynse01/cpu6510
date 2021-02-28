@@ -12,6 +12,8 @@ export class LDY implements IOperationWithAddress, IOperationWithValue {
 
     public executeWithValue(value: number): number {
         this._cpu.registerY = value;
+        this._cpu.zeroFlag = this._cpu.registerY == 0;
+        this._cpu.negativeFlag = this._cpu.registerY > 127;
         return 0;
     }
 
