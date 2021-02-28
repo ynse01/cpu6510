@@ -6,12 +6,12 @@ const cpu = new Processor();
 describe('Operations.BIT', ()=> {
     it('ShouldClearZeroFlagWhenResultOfBitwiseAndIsZero', ()=> {
         // Arrange
-        const adc = new BIT(cpu);
+        const bit = new BIT(cpu);
         cpu.accumulator = 128;
         const address = 0x1234;
         cpu.memory.write(address, 128);
         // Act
-        adc.executeWithAddress(address);
+        bit.executeWithAddress(address);
         // Assert
         expect(cpu.accumulator).toBe(128);
         expect(cpu.zeroFlag).toBeFalse();
@@ -21,14 +21,14 @@ describe('Operations.BIT', ()=> {
     });
     it('ShouldSetZeroFlagWhenResultOfBitwiseAndIsOne', ()=> {
         // Arrange
-        const adc = new BIT(cpu);
+        const bit = new BIT(cpu);
         cpu.accumulator = 128;
         const address = 0x1234;
         cpu.memory.write(address, 64);
         // Act
-        expect(cpu.accumulator).toBe(128);
-        adc.executeWithAddress(address);
+        bit.executeWithAddress(address);
         // Assert
+        expect(cpu.accumulator).toBe(128);
         expect(cpu.zeroFlag).toBeTrue();
         // Cleanup
         cpu.reset();
@@ -36,14 +36,14 @@ describe('Operations.BIT', ()=> {
     });
     it('ShouldSetNegativeFlagWhenMemoryValueIsBiggerThan128', ()=> {
         // Arrange
-        const adc = new BIT(cpu);
+        const bit = new BIT(cpu);
         cpu.accumulator = 64;
         const address = 0x1234;
         cpu.memory.write(address, 128);
         // Act
-        expect(cpu.accumulator).toBe(64);
-        adc.executeWithAddress(address);
+        bit.executeWithAddress(address);
         // Assert
+        expect(cpu.accumulator).toBe(64);
         expect(cpu.negativeFlag).toBeTrue();
         // Cleanup
         cpu.reset();
@@ -51,14 +51,14 @@ describe('Operations.BIT', ()=> {
     });
     it('ShouldClearNegativeFlagWhenMemoryValueIsSmallerThan128', ()=> {
         // Arrange
-        const adc = new BIT(cpu);
+        const bit = new BIT(cpu);
         cpu.accumulator = 128;
         const address = 0x1234;
         cpu.memory.write(address, 64);
         // Act
-        expect(cpu.accumulator).toBe(128);
-        adc.executeWithAddress(address);
+        bit.executeWithAddress(address);
         // Assert
+        expect(cpu.accumulator).toBe(128);
         expect(cpu.negativeFlag).toBeFalse();
         // Cleanup
         cpu.reset();
@@ -66,14 +66,14 @@ describe('Operations.BIT', ()=> {
     });
     it('ShouldSetOverflowFlagWhenMemoryValueIsBiggerThan64', ()=> {
         // Arrange
-        const adc = new BIT(cpu);
+        const bit = new BIT(cpu);
         cpu.accumulator = 6;
         const address = 0x1234;
         cpu.memory.write(address, 64);
         // Act
-        expect(cpu.accumulator).toBe(6);
-        adc.executeWithAddress(address);
+        bit.executeWithAddress(address);
         // Assert
+        expect(cpu.accumulator).toBe(6);
         expect(cpu.overflowFlag).toBeTrue();
         // Cleanup
         cpu.reset();
@@ -81,12 +81,12 @@ describe('Operations.BIT', ()=> {
     });
     it('ShouldClearOverflowFlagWhenMemoryValueIsSmallerThan64', ()=> {
         // Arrange
-        const adc = new BIT(cpu);
+        const bit = new BIT(cpu);
         cpu.accumulator = 6;
         const address = 0x1234;
         cpu.memory.write(address, 32);
         // Act
-        adc.executeWithAddress(address);
+        bit.executeWithAddress(address);
         // Assert
         expect(cpu.accumulator).toBe(6);
         expect(cpu.overflowFlag).toBeFalse();
