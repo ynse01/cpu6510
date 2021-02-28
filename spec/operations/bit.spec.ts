@@ -13,6 +13,7 @@ describe('Operations.BIT', ()=> {
         // Act
         adc.executeWithAddress(address);
         // Assert
+        expect(cpu.accumulator).toBe(128);
         expect(cpu.zeroFlag).toBeFalse();
         // Cleanup
         cpu.reset();
@@ -25,6 +26,7 @@ describe('Operations.BIT', ()=> {
         const address = 0x1234;
         cpu.memory.write(address, 64);
         // Act
+        expect(cpu.accumulator).toBe(128);
         adc.executeWithAddress(address);
         // Assert
         expect(cpu.zeroFlag).toBeTrue();
@@ -39,6 +41,7 @@ describe('Operations.BIT', ()=> {
         const address = 0x1234;
         cpu.memory.write(address, 128);
         // Act
+        expect(cpu.accumulator).toBe(64);
         adc.executeWithAddress(address);
         // Assert
         expect(cpu.negativeFlag).toBeTrue();
@@ -53,6 +56,7 @@ describe('Operations.BIT', ()=> {
         const address = 0x1234;
         cpu.memory.write(address, 64);
         // Act
+        expect(cpu.accumulator).toBe(128);
         adc.executeWithAddress(address);
         // Assert
         expect(cpu.negativeFlag).toBeFalse();
@@ -67,6 +71,7 @@ describe('Operations.BIT', ()=> {
         const address = 0x1234;
         cpu.memory.write(address, 64);
         // Act
+        expect(cpu.accumulator).toBe(6);
         adc.executeWithAddress(address);
         // Assert
         expect(cpu.overflowFlag).toBeTrue();
@@ -83,6 +88,7 @@ describe('Operations.BIT', ()=> {
         // Act
         adc.executeWithAddress(address);
         // Assert
+        expect(cpu.accumulator).toBe(6);
         expect(cpu.overflowFlag).toBeFalse();
         // Cleanup
         cpu.reset();
