@@ -1,6 +1,5 @@
 import { AddressingMode } from "../../src/cpu/addressing-mode";
 import { IOperationWithValue } from "../../src/cpu/operations/i-operation-with-value";
-import { Processor } from "../../src/cpu/processor";
 
 export class ValueOperationStub implements IOperationWithValue {
     private _lastValue: number = -1;
@@ -14,7 +13,7 @@ export class ValueOperationStub implements IOperationWithValue {
         return 0;
     }
 
-    public delay(mode: AddressingMode): number {
+    public delay(_mode: AddressingMode): number {
         return 1;
     }
 
