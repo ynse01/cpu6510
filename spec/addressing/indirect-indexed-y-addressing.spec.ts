@@ -5,7 +5,7 @@ import { AddressOperationStub } from "./address-operation-stub";
 
 const cpu = new Processor();
 
-describe('IndirectAddressing', ()=> {
+describe('IndirectIndexedYAddressing', ()=> {
     it('ShouldReadAddressFromInstructionStack', ()=> {
         // Arrange
         const programAddress = 0x1234;
